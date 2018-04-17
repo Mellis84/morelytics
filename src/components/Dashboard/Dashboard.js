@@ -24,11 +24,18 @@ export default class Dashboard extends Component {
 		}
 	}
 
+	getWidget(type) {
+		const { dashboardWidgets } = this.state;
+
+		return dashboardWidgets.filter((widget) => widget.type === type);
+	}
+
 	render() {
 		const { dashboardWidgets } = this.state;
+		const sortedWidgets = [...this.getWidget('topline'), ...this.getWidget('databox')];
 		return (
 			<DashboardWrapper>
-				{dashboardWidgets.map(widget => (
+				{sortedWidgets.map(widget => (
 					<Widget
 						key={widget.title} 
 						type={widget.type} 
